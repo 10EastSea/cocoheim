@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+/* font 적용 */
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+body { font-family: 'Do Hyeon', sans-serif; }
+
+/* pc 화면 */
+h1 {
+    margin: 50px;
+    margin-bottom: 40px;
+    font-size: 50px;
+}
+img {
+    vertical-align: baseline;
+    width: 35px;
+    height: 35px;
+}
+
+.input-form {
+    margin-bottom: 5px;
+}
+
+#wallet {
+    padding: 20px;
+    border: 1px solid #dee2e6;
+}
+
+/* moblie 화면 */
+@media (max-width: 992px) {
+    h1 {
+        margin: 45px;
+        margin-bottom: 35px;
+        font-size: 38px;
+    }
+    img {
+        width: 28px;
+        height: 28px;
+    }
+}
+@media (max-width: 767px) {
+
+}
+@media (max-width: 575px) {
+    #wallet {
+        padding: 15px;
+        border: 0px solid #FFFFFF;
+    }
+}
+@media (max-width: 419px) {
+    h1 {
+        margin: 40px;
+        margin-bottom: 30px;
+        font-size: xx-large;
+    }
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
