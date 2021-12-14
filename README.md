@@ -1,12 +1,10 @@
 # COCO HEIM
 
-```Bash
-# Compile
->> truffle compile
+## Compile
+    truffle compile
 
-# Migrate
->> truffle migrate
+## Migrate
+    truffle migrate
 
-# Run
->> npm run dev
-```
+## Run
+    npm run dev
