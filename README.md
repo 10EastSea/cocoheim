@@ -18,8 +18,11 @@ Web3.js v1.5.3
 Ganache CLI v6.12.2 (ganache-core: 2.13.2)
 ```
 
-## Compile & Run
+## Setup & Run
 ```Bash
+# setup
+>> npm install
+
 # compile
 >> truffle compile
 
