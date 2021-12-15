@@ -18,12 +18,8 @@ img {
     height: 35px;
 }
 
-.input-form {
-    margin-bottom: 5px;
-}
-.text-dark {
-    color: #212529;
-}
+.input-form { margin-bottom: 5px; }
+.text-dark { color: #212529; }
 
 #title {
     margin: 90px;
@@ -71,7 +67,5 @@ img {
     }
 
     #title { display: none; }
-    #wallet {
-        margin-top: 60px;
-    }
+    #wallet { margin-top: 60px; }
 }

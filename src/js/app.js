@@ -49,8 +49,8 @@ App = {
   handleTransfer: function(event) {
     event.preventDefault();
 
-    var amount = convert18Decimal($('#CTTransferAmount').val());
-    var toAddress = $('#CTTransferAddress').val();
+    var amount = convert18Decimal($('#to_amount').val());
+    var toAddress = $('#to_address').val();
 
     console.log('Transfer ' + amount + ' CT to ' + toAddress);
 
@@ -89,7 +89,7 @@ App = {
         return cocoTokenInstance.balanceOf(account);
       }).then(function(result) {
         balance = balance4Deciaml(result.c[0]);
-        $('#CTBalance').text(balance);
+        $('#coco_balance').text(balance);
       }).catch(function(err) {
         console.log(err.message);
       });
