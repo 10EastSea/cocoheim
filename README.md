@@ -1,5 +1,6 @@
 # COCO HEIM
 
+
 ## Version
 ```Bash
 >> node -v
@@ -18,6 +19,7 @@ Web3.js v1.5.3
 Ganache CLI v6.12.2 (ganache-core: 2.13.2)
 ```
 
+
 ## Setup & Run
 ```Bash
 # setup
@@ -32,3 +34,8 @@ Ganache CLI v6.12.2 (ganache-core: 2.13.2)
 # run
 >> npm run dev
 ```
+
+
+## ❗️Precautions for compile
+
+Each contracts needs to be compiled to suit the solidity version (refer to `truffle-config.js`).
