@@ -1,6 +1,8 @@
 module.exports = {
-  // See <http://truffleframework.com/docs/advanced/configuration>
-  // for more about customizing your Truffle configuration!
+  contracts_directory: "./contracts/main", // solc version: 0.5.16
+  // contracts_directory: "./contracts/swap/core", // solc version: 0.5.16
+  // contracts_directory: "./contracts/swap/lib", // solc version: 0.6.6
+  // contracts_directory: "./contracts/swap/periphery", // solc version: 0.6.6
   networks: {
     development: {
       host: "192.168.0.134",
