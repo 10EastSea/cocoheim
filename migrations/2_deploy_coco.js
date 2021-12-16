@@ -7,8 +7,8 @@ var Router = artifacts.require("./swap/periphery/UniswapV2Router02.sol");
 
 module.exports = async function(deployer, network, accounts) {
   // 토큰 배포
-  await deployer.deploy(COCOToken, "COCO Token", "COCO", 18);
-  await deployer.deploy(HEIMToken, "HEIM Token", "HEIM", 18);
+  await deployer.deploy(COCOToken);
+  await deployer.deploy(HEIMToken);
   await deployer.deploy(WETH);
 
   let cocoAddress, heimAddress;
@@ -32,11 +32,12 @@ module.exports = async function(deployer, network, accounts) {
   await deployer.deploy(Factory, accounts[0]);
   const factory = await Factory.deployed();
   const FACTORY_ADDRESS = factory.address;
-  
-  await factory.createPair(cocoAddress, heimAddress);
+  // await factory.createPair(cocoAddress, heimAddress);
 
 
   
   // 라우터 배포 (periphery)
   await deployer.deploy(Router, FACTORY_ADDRESS, weth.address)
+  const router = await Router.deployed();
+  await router.addLiquidity(cocoAddress, heimAddress, 100000, 200000, 0, 0, accounts[0], Date.now())
 };

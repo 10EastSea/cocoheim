@@ -40,7 +40,7 @@ App = {
 
   // 이벤트 리스너들
   bindEvents: function() {
-    $(document).on('click', '#transferButton', App.handleTransfer);
+    $(document).on('click', '#transfer_btn', App.handleTransfer);
   },
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////

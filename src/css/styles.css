@@ -20,12 +20,27 @@ img {
 
 .input-form { margin-bottom: 5px; }
 .text-dark { color: #212529; }
+.token-img {
+    vertical-align: baseline;
+    width: 20px;
+    height: 20px;
+}
 
 #title {
     margin: 90px;
     margin-bottom: 30px;
 }
 #wallet {
+    padding: 20px;
+    border: 1px solid #dee2e6;
+}
+#add_liquidity {
+    margin-top: 90px;
+    padding: 20px;
+    border: 1px solid #dee2e6;
+}
+#swap {
+    margin-top: 90px;
     padding: 20px;
     border: 1px solid #dee2e6;
 }
@@ -58,6 +73,14 @@ img {
         padding: 15px;
         border: 0px solid #FFFFFF;
     }
+    #add_liquidity {
+        padding: 15px;
+        border: 0px solid #FFFFFF;
+    }
+    #swap {
+        padding: 15px;
+        border: 0px solid #FFFFFF;
+    }
 }
 @media (max-width: 419px) {
     h1 { font-size: xx-large; }
@@ -68,4 +91,6 @@ img {
 
     #title { display: none; }
     #wallet { margin-top: 60px; }
+    #add_liquidity { margin-top: 60px; }
+    #swap { margin-top: 60px; }
 }
