@@ -7,9 +7,12 @@ var Router = artifacts.require("./swap/periphery/UniswapV2Router02.sol");
 
 module.exports = async function(deployer, network, accounts) {
   // 토큰 배포
-  await deployer.deploy(COCOToken);
-  await deployer.deploy(HEIMToken);
+  await deployer.deploy(COCOToken, "COCO Token", "COCO");
+  await deployer.deploy(HEIMToken, "HEIM Token", "HEIM");
   await deployer.deploy(WETH);
+
+  const cocoToken = await COCOToken.deployed();
+  const heimToken = await HEIMToken.deployed();
 
   let cocoAddress, heimAddress;
   let weth;
@@ -19,8 +22,6 @@ module.exports = async function(deployer, network, accounts) {
     heimAddress = "";
     weth = await WETH.at("0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2");
   } else {
-    const cocoToken = await COCOToken.deployed();
-    const heimToken = await HEIMToken.deployed();
     cocoAddress = cocoToken.address;
     heimAddress = heimToken.address;
     weth = await WETH.deployed();
@@ -37,7 +38,10 @@ module.exports = async function(deployer, network, accounts) {
 
   
   // 라우터 배포 (periphery)
-  await deployer.deploy(Router, FACTORY_ADDRESS, weth.address)
+  await deployer.deploy(Router, FACTORY_ADDRESS, weth.address);
   const router = await Router.deployed();
-  await router.addLiquidity(cocoAddress, heimAddress, 100000, 200000, 0, 0, accounts[0], Date.now())
+  // await cocoToken.approve(router.address, MaxUint256);
+  // await heimToken.approve(router.address, MaxUint256);
+  // console.log("approve ok");
+  // await router.addLiquidity(cocoAddress, heimAddress, bigNumberify(10000), bigNumberify(10000), 0, 0, accounts[0], MaxUint256, overrides);
 };

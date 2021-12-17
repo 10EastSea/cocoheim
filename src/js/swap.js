@@ -76,12 +76,12 @@ App = {
         return cocoRouterInstance.addLiquidity(
                 App.contractsAddress.cocoTokenAddress,
                 App.contractsAddress.heimTokenAddress,
-                token1Amount,
-                token2Amount,
+                "1000000000000000000",
+                "4000000000000000000",
                 0,
                 0,
                 account,
-                Math.ceil(Date.now() / 1000) + 100000,
+                "9999999999999999999",
                 {from: account, gas: 5000000});
       }).then(function(result) {
         alert('Add Liquidity Successful!');
