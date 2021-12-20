@@ -63,33 +63,35 @@ App = {
 
     console.log('Add liquidity ' + token1Amount + ' & ' + token2Amount);
 
-    var cocoRouterInstance;
+    alert("Preparing..");
 
-    web3.eth.getAccounts(function(error, accounts) {
-      if(error) { console.log(error); }
-      var account = accounts[0];
+    // var cocoRouterInstance;
 
-      App.contracts.COCORouter.deployed().then(function(instance) {
-        cocoRouterInstance = instance;
-        App.contractsAddress.cocoRouterAddress = instance.address;
+    // web3.eth.getAccounts(function(error, accounts) {
+    //   if(error) { console.log(error); }
+    //   var account = accounts[0];
 
-        return cocoRouterInstance.addLiquidity(
-                App.contractsAddress.cocoTokenAddress,
-                App.contractsAddress.heimTokenAddress,
-                "1000000000000000000",
-                "4000000000000000000",
-                0,
-                0,
-                account,
-                "9999999999999999999",
-                {from: account, gas: 5000000});
-      }).then(function(result) {
-        alert('Add Liquidity Successful!');
-        return App.getBalances();
-      }).catch(function(err) {
-        console.log(err.message);
-      });
-    });
+    //   App.contracts.COCORouter.deployed().then(function(instance) {
+    //     cocoRouterInstance = instance;
+    //     App.contractsAddress.cocoRouterAddress = instance.address;
+
+    //     return cocoRouterInstance.addLiquidity(
+    //             App.contractsAddress.cocoTokenAddress,
+    //             App.contractsAddress.heimTokenAddress,
+    //             "1000000000000000000",
+    //             "4000000000000000000",
+    //             0,
+    //             0,
+    //             account,
+    //             "9999999999999999999",
+    //             {from: account, gas: 5000000});
+    //   }).then(function(result) {
+    //     alert('Add Liquidity Successful!');
+    //     return App.getBalances();
+    //   }).catch(function(err) {
+    //     console.log(err.message);
+    //   });
+    // });
   },
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -40,8 +40,5 @@ module.exports = async function(deployer, network, accounts) {
   // 라우터 배포 (periphery)
   await deployer.deploy(Router, FACTORY_ADDRESS, weth.address);
   const router = await Router.deployed();
-  // await cocoToken.approve(router.address, MaxUint256);
-  // await heimToken.approve(router.address, MaxUint256);
-  // console.log("approve ok");
-  // await router.addLiquidity(cocoAddress, heimAddress, bigNumberify(10000), bigNumberify(10000), 0, 0, accounts[0], MaxUint256, overrides);
+  // await router.addLiquidity(cocoAddress, heimAddress, "100000000000000000000", "400000000000000000000", 0, 0, accounts[0], "9999999999999");
 };

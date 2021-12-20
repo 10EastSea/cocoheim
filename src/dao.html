@@ -36,10 +36,10 @@
                 <a class="nav-link active" aria-current="page" href="index.html"><span class="text-dark">Wallet</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"><span class="text-dark">Swap</span></a>
+                <a class="nav-link active" aria-current="page" href="swap.html"><span class="text-dark">Swap</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="dao.html"><span class="text-dark">DAO</span></a>
+                <a class="nav-link active" aria-current="page" href="#"><span class="text-dark">DAO</span></a>
               </li>
             </ul>
           </div>
@@ -48,53 +48,7 @@
     </nav>
 
     <div class="container">
-
-      <!-- Navs로 Add Liquidity와 Swap 구분 -->
-
-      <div class="row justify-content-center">
-        <div id="add_liquidity" class="col-md-4 card-border">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title text-center">Add Liquidity</h3>
-              <hr/>
-            </div>
-
-            <div class="panel-body">
-              <h4><img class="token-img" src="img/coco.png"> COCO</h4>
-              Your balance: <span id="token1_balance">0</span> COCO
-              <input id="token1_amount" type="text" class="form-control input-form" placeholder="0" />
-              <br/>
-
-              <h4><img class="token-img" src="img/heim.png"> HEIM</h4>
-              Your balance: <span id="token2_balance">0</span> HEIM
-              <input id="token2_amount" type="text" class="form-control input-form" placeholder="0" />
-              <br/>
-
-              <div class="row justify-content-center">
-                <div class="text-center">
-                  <button id="add_btn" class="btn btn-success" type="button">Add</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-2"></div>
-
-        <div id="swap" class="col-md-4 card-border">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title text-center">Swap</h3>
-              <hr/>
-            </div>
-
-            <div class="panel-body">
-              <!-- content -->
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <h4 id="title" class="text-center">Preparing..</h4>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -103,6 +57,5 @@
     <script src="js/lib/web3.min.js"></script>
     <script src="js/lib/truffle-contract.js"></script>
     <script src="js/util.js"></script>
-    <script src="js/swap.js"></script>
   </body>
 </html>
