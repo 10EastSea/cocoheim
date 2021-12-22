@@ -3,7 +3,7 @@ var HEIMToken = artifacts.require("./main/HEIMToken.sol");
 var WETH = artifacts.require("./swap/periphery/test/WETH.sol");
 
 var Factory = artifacts.require("./swap/core/UniswapV2Factory.sol");
-var Router = artifacts.require("./swap/periphery/UniswapV2Router02.sol");
+var Router = artifacts.require("./swap/periphery/COCORouter.sol");
 
 module.exports = async function(deployer, network, accounts) {
   // 토큰 배포
@@ -34,11 +34,13 @@ module.exports = async function(deployer, network, accounts) {
   const factory = await Factory.deployed();
   const FACTORY_ADDRESS = factory.address;
   // await factory.createPair(cocoAddress, heimAddress);
+  const INIT_HASH_CODE = await factory.getInitHashCode();
+  console.log(INIT_HASH_CODE);
 
 
   
   // 라우터 배포 (periphery)
   await deployer.deploy(Router, FACTORY_ADDRESS, weth.address);
   const router = await Router.deployed();
-  // await router.addLiquidity(cocoAddress, heimAddress, "100000000000000000000", "400000000000000000000", 0, 0, accounts[0], "9999999999999");
+  await router.addLiquidity(cocoAddress, heimAddress, "100000000000000000000", "400000000000000000000", 0, 0, accounts[0]);
 };
