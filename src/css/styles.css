@@ -50,6 +50,9 @@ img {
     border: 2px solid #FFE6CD;
     border-radius: 50%;
 }
+#change_btn {
+    margin-right: 5px;
+}
 
 
 /* moblie 화면 */

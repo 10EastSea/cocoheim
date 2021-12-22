@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   contractsAddress: {},
+  clickedStatus: "COCO",
 
   init: function() { return App.initWeb3(); },
 
@@ -36,7 +37,7 @@ App = {
 
       return App.getBalances();
     });
-    $.getJSON('UniswapV2Router02.json', function(data) {
+    $.getJSON('COCORouter.json', function(data) {
       var COCORouterArtifact = data;
       App.contracts.COCORouter = TruffleContract(COCORouterArtifact);
       App.contracts.COCORouter.setProvider(App.web3Provider);
@@ -50,6 +51,9 @@ App = {
   // 이벤트 리스너들
   bindEvents: function() {
     $(document).on('click', '#add_btn', App.handleAddLiquidity);
+    $(document).on('click', '#swap_btn', App.handleSwap);
+
+    $(document).on('click', '#change_btn', App.handleChangeButton);
   },
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,38 +64,88 @@ App = {
 
     var token1Amount = convert18Decimal($('#token1_amount').val());
     var token2Amount = convert18Decimal($('#token2_amount').val());
-
     console.log('Add liquidity ' + token1Amount + ' & ' + token2Amount);
 
-    alert("Preparing..");
+    var cocoRouterInstance;
 
-    // var cocoRouterInstance;
+    web3.eth.getAccounts(function(error, accounts) {
+      if(error) { console.log(error); }
+      var account = accounts[0];
 
-    // web3.eth.getAccounts(function(error, accounts) {
-    //   if(error) { console.log(error); }
-    //   var account = accounts[0];
+      App.contracts.COCORouter.deployed().then(function(instance) {
+        cocoRouterInstance = instance;
+        App.contractsAddress.cocoRouterAddress = instance.address;
 
-    //   App.contracts.COCORouter.deployed().then(function(instance) {
-    //     cocoRouterInstance = instance;
-    //     App.contractsAddress.cocoRouterAddress = instance.address;
+        return cocoRouterInstance.addLiquidity(
+                App.contractsAddress.cocoTokenAddress,
+                App.contractsAddress.heimTokenAddress,
+                token1Amount,
+                token2Amount,
+                0,
+                0,
+                account,
+                {from: account, gas: 5000000});
+      }).then(function(result) {
+        alert('Add Liquidity Successful!');
+        return App.getBalances();
+      }).catch(function(err) {
+        console.log(err.message);
+      });
+    });
+  },
 
-    //     return cocoRouterInstance.addLiquidity(
-    //             App.contractsAddress.cocoTokenAddress,
-    //             App.contractsAddress.heimTokenAddress,
-    //             "1000000000000000000",
-    //             "4000000000000000000",
-    //             0,
-    //             0,
-    //             account,
-    //             "9999999999999999999",
-    //             {from: account, gas: 5000000});
-    //   }).then(function(result) {
-    //     alert('Add Liquidity Successful!');
-    //     return App.getBalances();
-    //   }).catch(function(err) {
-    //     console.log(err.message);
-    //   });
-    // });
+  // 핸들러: swap
+  handleSwap: function(event) {
+    event.preventDefault();
+
+    var tokenAmount = convert18Decimal($('#swap_token_amount').val());
+    console.log('Swap ' + tokenAmount + " " + App.clickedStatus);
+
+    var cocoRouterInstance, path;
+
+    web3.eth.getAccounts(function(error, accounts) {
+      if(error) { console.log(error); }
+      var account = accounts[0];
+
+      if(App.clickedStatus == "COCO") {
+        path = [App.contractsAddress.cocoTokenAddress, App.contractsAddress.heimTokenAddress];
+      } else {
+        path = [App.contractsAddress.heimTokenAddress, App.contractsAddress.cocoTokenAddress];
+      }
+
+      App.contracts.COCORouter.deployed().then(function(instance) {
+        cocoRouterInstance = instance;
+        App.contractsAddress.cocoRouterAddress = instance.address;
+
+        return cocoRouterInstance.swapExactTokensForTokens(
+                tokenAmount,
+                0,
+                path,
+                account,
+                {from: account, gas: 5000000});
+      }).then(function(result) {
+        alert('Swap Successful!');
+        return App.getBalances();
+      }).catch(function(err) {
+        console.log(err.message);
+      });
+    });
+  },
+
+  // 핸들러: change button
+  handleChangeButton: function(event) {
+    if(App.clickedStatus == "COCO") { // change HEIM
+      $("#change_btn").html("COCO to HEIM");
+      $("#swap_token_name").text(" HEIM");
+      $("#swap_token_img").attr("src", "img/heim.png");
+      App.clickedStatus = "HEIM";
+    } else { // change COCO
+      $("#change_btn").html("HEIM to COCO");
+      $("#swap_token_name").text(" COCO");
+      $("#swap_token_img").attr("src", "img/coco.png");
+      App.clickedStatus = "COCO";
+    }
+    return App.getBalances();
   },
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,6 +167,7 @@ App = {
       }).then(function(result) {
         balance = balance4Deciaml(result.c[0]);
         $('#token1_balance').text(balance);
+        if(App.clickedStatus == "COCO") { $('#swap_token_balance').text(balance); }
       }).catch(function(err) {
         console.log(err.message);
       });
@@ -124,6 +179,7 @@ App = {
       }).then(function(result) {
         balance = balance4Deciaml(result.c[0]);
         $('#token2_balance').text(balance);
+        if(App.clickedStatus == "HEIM") { $('#swap_token_balance').text(balance); }
       }).catch(function(err) {
         console.log(err.message);
       });
