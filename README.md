@@ -25,7 +25,7 @@ Ganache CLI v6.12.2 (ganache-core: 2.13.2)
 # setup
 >> npm install
 
-# compile
+# compile (Precautions for compile)
 >> truffle compile
 
 # migrate
