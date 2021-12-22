@@ -37,5 +37,13 @@ Ganache CLI v6.12.2 (ganache-core: 2.13.2)
 
 
 ## ❗️Precautions for compile
-
 Each contracts needs to be compiled to suit the solidity version (refer to `truffle-config.js`).
+
+
+## ❗️Ganache setting
+``` Bash
+# ganache-cli -h [host name] -p [port number] --account="[private key of my wallet], [ethereum]"
+>> ganache-cli -h 192.168.0.134 -p 7545 --account="0xd461db..., 100000000000000000000000000"
+```
+
+* `host name` should also be modified in `app.js`, `swap.js`, `util.js` and `truffle-config.js`.
