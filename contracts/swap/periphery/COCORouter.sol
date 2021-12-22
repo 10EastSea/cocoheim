@@ -67,8 +67,6 @@ contract COCORouter {
         address pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
         // TransferHelper.safeTransferFrom(tokenA, msg.sender, pair, amountA);
         // TransferHelper.safeTransferFrom(tokenB, msg.sender, pair, amountB);
-        IERC20(tokenA).approve(msg.sender, amountA);
-        IERC20(tokenB).approve(msg.sender, amountB);
         IERC20(tokenA).transferFrom(msg.sender, pair, amountA);
         IERC20(tokenB).transferFrom(msg.sender, pair, amountB);
         liquidity = IUniswapV2Pair(pair).mint(to);
@@ -119,9 +117,10 @@ contract COCORouter {
     ) external returns (uint[] memory amounts) {
         amounts = UniswapV2Library.getAmountsOut(factory, amountIn, path);
         require(amounts[amounts.length - 1] >= amountOutMin, 'COCORouter: INSUFFICIENT_OUTPUT_AMOUNT');
-        TransferHelper.safeTransferFrom(
-            path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
-        );
+        // TransferHelper.safeTransferFrom(
+        //     path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
+        // );
+        IERC20(path[0]).transferFrom(msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]);
         _swap(amounts, path, to);
     }
     function swapTokensForExactTokens(

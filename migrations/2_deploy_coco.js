@@ -32,15 +32,17 @@ module.exports = async function(deployer, network, accounts) {
   // 팩토리 배포 (core)
   await deployer.deploy(Factory, accounts[0]);
   const factory = await Factory.deployed();
-  const FACTORY_ADDRESS = factory.address;
-  // await factory.createPair(cocoAddress, heimAddress);
   const INIT_HASH_CODE = await factory.getInitHashCode();
   console.log(INIT_HASH_CODE);
 
 
   
   // 라우터 배포 (periphery)
-  await deployer.deploy(Router, FACTORY_ADDRESS, weth.address);
+  await deployer.deploy(Router, factory.address, weth.address);
   const router = await Router.deployed();
-  await router.addLiquidity(cocoAddress, heimAddress, "100000000000000000000", "400000000000000000000", 0, 0, accounts[0]);
+
+  // await cocoToken.approve(accounts[0], "100000000000000000000000"); // 코코토큰 사용 승인
+  // await heimToken.approve(accounts[0], "100000000000000000000000"); // 하임토큰 사용 승인
+  // await router.addLiquidity(cocoAddress, heimAddress, "100000000000000000000", "400000000000000000000", 0, 0, accounts[0]); // Add Liquidity
+  // await router.swapExactTokensForTokens("1000000000000000", 0, [cocoAddress, heimAddress], accounts[0]); // Swap
 };
