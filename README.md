@@ -35,6 +35,7 @@ Ganache CLI v6.12.2 (ganache-core: 2.13.2)
 >> npm run dev
 ```
 
+<br />
 
 ## ❗️Precautions for compile
 Each contracts needs to be compiled to suit the solidity version (refer to `truffle-config.js`).
