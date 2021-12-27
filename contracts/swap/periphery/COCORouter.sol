@@ -65,10 +65,8 @@ contract COCORouter {
     ) external returns (uint amountA, uint amountB, uint liquidity) {
         (amountA, amountB) = _addLiquidity(tokenA, tokenB, amountADesired, amountBDesired, amountAMin, amountBMin);
         address pair = UniswapV2Library.pairFor(factory, tokenA, tokenB);
-        // TransferHelper.safeTransferFrom(tokenA, msg.sender, pair, amountA);
-        // TransferHelper.safeTransferFrom(tokenB, msg.sender, pair, amountB);
-        IERC20(tokenA).transferFrom(msg.sender, pair, amountA);
-        IERC20(tokenB).transferFrom(msg.sender, pair, amountB);
+        TransferHelper.safeTransferFrom(tokenA, msg.sender, pair, amountA);
+        TransferHelper.safeTransferFrom(tokenB, msg.sender, pair, amountB);
         liquidity = IUniswapV2Pair(pair).mint(to);
     }
     function addLiquidityETH(
@@ -117,10 +115,9 @@ contract COCORouter {
     ) external returns (uint[] memory amounts) {
         amounts = UniswapV2Library.getAmountsOut(factory, amountIn, path);
         require(amounts[amounts.length - 1] >= amountOutMin, 'COCORouter: INSUFFICIENT_OUTPUT_AMOUNT');
-        // TransferHelper.safeTransferFrom(
-        //     path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
-        // );
-        IERC20(path[0]).transferFrom(msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]);
+        TransferHelper.safeTransferFrom(
+            path[0], msg.sender, UniswapV2Library.pairFor(factory, path[0], path[1]), amounts[0]
+        );
         _swap(amounts, path, to);
     }
     function swapTokensForExactTokens(

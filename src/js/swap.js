@@ -84,7 +84,7 @@ App = {
                 0,
                 0,
                 account,
-                {from: account, gas: 5000000});
+                {from: account, gas: 1000000});
       }).then(function(result) {
         alert('Add Liquidity Successful!');
         return App.getBalances();
@@ -122,7 +122,7 @@ App = {
                 0,
                 path,
                 account,
-                {from: account, gas: 5000000});
+                {from: account, gas: 1000000});
       }).then(function(result) {
         alert('Swap Successful!');
         return App.getBalances();
@@ -135,15 +135,19 @@ App = {
   // 핸들러: change button
   handleChangeButton: function(event) {
     if(App.clickedStatus == "COCO") { // change HEIM
-      $("#change_btn").html("COCO to HEIM");
+      $("#change_btn").html("Change COCO to HEIM");
       $("#swap_token_name").text(" HEIM");
       $("#swap_token_img").attr("src", "img/heim.png");
+
       App.clickedStatus = "HEIM";
+      $("#current_status_text").text("HEIM to COCO");
     } else { // change COCO
-      $("#change_btn").html("HEIM to COCO");
+      $("#change_btn").html("Change HEIM to COCO");
       $("#swap_token_name").text(" COCO");
       $("#swap_token_img").attr("src", "img/coco.png");
+
       App.clickedStatus = "COCO";
+      $("#current_status_text").text("COCO to HEIM");
     }
     return App.getBalances();
   },

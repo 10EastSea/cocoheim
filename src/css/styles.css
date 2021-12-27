@@ -50,9 +50,9 @@ img {
     border: 2px solid #FFE6CD;
     border-radius: 50%;
 }
-#change_btn {
-    margin-right: 5px;
-}
+#current_status_text { font-size: medium; }
+#swap_btn { margin-bottom: 10px; }
+#change_btn { margin-top: 10px; }
 
 
 /* moblie 화면 */

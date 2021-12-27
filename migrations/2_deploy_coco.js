@@ -40,9 +40,10 @@ module.exports = async function(deployer, network, accounts) {
   // 라우터 배포 (periphery)
   await deployer.deploy(Router, factory.address, weth.address);
   const router = await Router.deployed();
+  await cocoToken.approve(router.address, "100000000000000000000000"); // 코코토큰 사용 승인
+  await heimToken.approve(router.address, "100000000000000000000000"); // 하임토큰 사용 승인
 
-  // await cocoToken.approve(accounts[0], "100000000000000000000000"); // 코코토큰 사용 승인
-  // await heimToken.approve(accounts[0], "100000000000000000000000"); // 하임토큰 사용 승인
+  // Test
   // await router.addLiquidity(cocoAddress, heimAddress, "100000000000000000000", "400000000000000000000", 0, 0, accounts[0]); // Add Liquidity
   // await router.swapExactTokensForTokens("1000000000000000", 0, [cocoAddress, heimAddress], accounts[0]); // Swap
 };
