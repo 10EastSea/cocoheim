@@ -84,7 +84,7 @@ App = {
                 0,
                 0,
                 account,
-                {from: account, gas: 1000000});
+                {from: account, gas: 5000000});
       }).then(function(result) {
         alert('Add Liquidity Successful!');
         return App.getBalances();
@@ -122,7 +122,7 @@ App = {
                 0,
                 path,
                 account,
-                {from: account, gas: 1000000});
+                {from: account, gas: 5000000});
       }).then(function(result) {
         alert('Swap Successful!');
         return App.getBalances();
