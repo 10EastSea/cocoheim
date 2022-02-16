@@ -5,7 +5,7 @@ module.exports = {
   contracts_directory: "./contracts/swap/periphery", // solc version: 0.6.6
   networks: {
     development: {
-      host: "192.168.0.134",
+      host: "127.0.0.1",
       port: 7545,
       network_id: "*" // Match any network id
     }
